@@ -48,4 +48,4 @@ Bu proje öğrenme amaçlı geliştirilmektedir ve zaman içerisinde yeni özell
 
 Fadime Uludağ
 
-Bilgisayar Mühendisliği Öğrencisi
+
