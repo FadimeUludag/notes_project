@@ -1,86 +1,51 @@
-\# Notes Project
+# Notes Project
 
+Bu proje Django kullanılarak geliştirilmiş basit bir not yönetim uygulamasıdır.
 
+Django öğrenme sürecinde backend geliştirme, kullanıcı yönetimi ve veritabanı işlemleri konusunda pratik yapmak amacıyla geliştirilmiştir.
 
-Bu proje Django kullanılarak geliştirilmiş basit bir not uygulamasıdır.
+## Özellikler
 
+* Kullanıcı kayıt sistemi
+* Kullanıcı giriş ve çıkış sistemi
+* Not ekleme
+* Not düzenleme
+* Not silme
+* Not detaylarını görüntüleme
 
+## Kullanılan Teknolojiler
 
-\## Özellikler
+* Python
+* Django
+* MSSQL
+* HTML
+* CSS
+* Git & GitHub
 
-
-
-\* Not ekleme
-
-\* Not düzenleme
-
-\* Not silme
-
-\* Kullanıcı kayıt sistemi
-
-\* Kullanıcı giriş sistemi
-
-
-
-\## Kullanılan Teknolojiler
-
-
-
-\* Python
-
-\* Django
-
-\* HTML
-
-\* CSS
-
-\* SQLite
-
-
-
-\## Kurulum
-
-
+## Kurulum
 
 ```bash
+git clone https://github.com/FadimeUludag/notes_project.git
 
-git clone https://github.com/FadimeUludag/notes\_project.git
-
-
-
-cd notes\_project
-
-
+cd notes_project
 
 python -m venv venv
 
-
-
-venv\\Scripts\\activate
-
-
+venv\Scripts\activate
 
 pip install -r requirements.txt
 
-
-
 python manage.py migrate
 
-
-
 python manage.py runserver
-
 ```
 
+## Geliştirme Durumu
 
+Bu proje öğrenme amaçlı geliştirilmektedir ve zaman içerisinde yeni özellikler eklenmeye devam edecektir.
 
-\## Geliştiren
-
-
+## Geliştiren
 
 Fadime Uludağ
 
 Bilgisayar Mühendisliği Öğrencisi
-
-
-
