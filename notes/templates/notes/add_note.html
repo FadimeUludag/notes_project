@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yeni Not Ekle</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+
+    <style>
+        :root {
+
+            --bg: linear-gradient(135deg, #eef3e8 0%, #f7f7f2 100%);
+
+            --card: rgba(255, 255, 255, 0.72);
+
+            --text: #24313d;
+            --muted: #7c8694;
+
+            --primary: linear-gradient(135deg, #2ea89b 0%, #9ca87b 100%);
+
+            --shadow:
+                0 10px 30px rgba(71, 97, 78, 0.08),
+                0 2px 10px rgba(0, 0, 0, 0.04);
+
+            --border: rgba(255, 255, 255, 0.6);
+        }
+
+        body {
+            background: var(--bg);
+            min-height: 100vh;
+            font-family: system-ui;
+            color: var(--text);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+            overflow: hidden;
+            overflow-y: auto;
+
+            padding: 20px;
+        }
+
+        /* BACKGROUND BLOBS */
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: .35;
+        }
+
+        body::before {
+            background: #8fd3c7;
+            top: -120px;
+            left: -100px;
+        }
+
+        body::after {
+            background: #d8d2a7;
+            bottom: -120px;
+            right: -100px;
+        }
+
+        /* CARD */
+        .card-box {
+
+            width: 100%;
+            max-width: 650px;
+
+            background: var(--card);
+
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+
+            border-radius: 34px;
+
+            border: 1px solid var(--border);
+
+            padding: 40px;
+
+            box-shadow: var(--shadow);
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        /* GLOW EFFECT */
+        .card-box::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: -100px;
+            right: -100px;
+
+            width: 220px;
+            height: 220px;
+
+            background: rgba(143, 211, 199, 0.25);
+
+            border-radius: 50%;
+
+            filter: blur(50px);
+        }
+
+        /* TITLE */
+        .title {
+
+            font-size: 2rem;
+            font-weight: 800;
+
+            margin-bottom: 8px;
+
+            color: #1e293b;
+        }
+
+        .subtitle {
+
+            color: var(--muted);
+
+            margin-bottom: 35px;
+        }
+
+        /* LABELS */
+        .form-label {
+
+            font-weight: 700;
+
+            margin-bottom: 10px;
+
+            color: #334155;
+        }
+
+        /* INPUTS */
+        .form-control {
+
+            border: 1px solid rgba(255, 255, 255, 0.7);
+
+            background: rgba(255, 255, 255, 0.6);
+
+            backdrop-filter: blur(10px);
+
+            border-radius: 18px;
+
+            padding: 15px 18px;
+
+            font-size: 15px;
+
+            color: var(--text);
+
+            box-shadow:
+                inset 0 1px 2px rgba(255, 255, 255, 0.3),
+                0 4px 10px rgba(0, 0, 0, 0.03);
+
+            transition: .2s ease;
+        }
+
+        .form-control:focus {
+
+            border-color: rgba(46, 168, 155, 0.4);
+
+            box-shadow:
+                0 0 0 4px rgba(46, 168, 155, 0.12);
+
+            background: rgba(255, 255, 255, 0.85);
+        }
+
+        textarea.form-control {
+            resize: none;
+        }
+
+        /* BUTTON */
+        .btn-main {
+
+            width: 100%;
+
+            border: none;
+
+            background: var(--primary);
+
+            color: white;
+
+            padding: 16px;
+
+            border-radius: 18px;
+
+            font-size: 1rem;
+            font-weight: 700;
+
+            margin-top: 10px;
+
+            box-shadow:
+                0 10px 25px rgba(46, 168, 155, 0.25);
+
+            transition: .25s ease;
+        }
+
+        .btn-main:hover {
+
+            transform: translateY(-3px);
+
+            color: white;
+        }
+
+        /* ICON */
+        .top-icon {
+
+            width: 72px;
+            height: 72px;
+
+            border-radius: 24px;
+
+            background: var(--primary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+
+            font-size: 28px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 10px 25px rgba(46, 168, 155, 0.22);
+        }
+
+        @media(max-width:768px) {
+
+            .card-box {
+                padding: 28px;
+                border-radius: 28px;
+            }
+
+            .title {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card-box">
+
+        <div class="top-icon">
+            <i class="bi bi-journal-plus"></i>
+        </div>
+
+        <h1 class="title">
+            Yeni Not
+        </h1>
+
+        <p class="subtitle">
+            Düşüncelerini modern ve düzenli şekilde kaydet ✨
+        </p>
+
+        <!-- DJANGO FORM -->
+        <form method="POST" action="/api/add/">
+
+            {% csrf_token %}
+
+            <div class="mb-4">
+
+                <label class="form-label">
+                    Başlık
+                </label>
+
+                <input type="text" name="title" class="form-control" placeholder="Not başlığı gir..." required>
+
+            </div>
+
+            <div class="mb-4">
+
+                <label class="form-label">Not Türü</label>
+
+                <div class="d-flex gap-4">
+
+                    <label style="cursor:pointer;">
+                        <input type="radio" name="type" value="note" checked onclick="toggleType()">
+                        📝 Not
+                    </label>
+
+                    <label style="cursor:pointer;">
+                        <input type="radio" name="type" value="todo" onclick="toggleType()">
+                        ☑️ Görev
+                    </label>
+
+                </div>
+
+                <div class="mb-4">
+
+                    <label class="form-label">
+                        İçerik
+                    </label>
+
+                    <textarea id="contentBox" name="content" class="form-control" rows="7"
+                        placeholder="Bugün aklında ne var?" required></textarea>
+
+                </div>
+
+                <!-- TODO BOX -->
+                <div id="todoBox" class="mb-4" style="display:none;">
+
+                    <label class="form-label">Görev Listesi</label>
+
+                    <div id="todoList"></div>
+
+                    <button type="button" class="btn btn-sm btn-outline-primary mt-2" onclick="addTodo()">
+                        + Görev ekle
+                    </button>
+
+                </div>
+
+                <button type="submit" class="btn-main">
+
+                    <i class="bi bi-check2-circle me-2"></i>
+                    Kaydet
+
+                </button>
+
+        </form>
+
+    </div>
+    <script>
+        function toggleType() {
+            let type = document.querySelector('input[name="type"]:checked').value;
+
+            let todoBox = document.getElementById("todoBox");
+            let contentBox = document.getElementById("contentBox");
+
+            if (type === "todo") {
+
+                todoBox.style.display = "block";
+
+                contentBox.style.display = "none";
+                contentBox.removeAttribute("required");
+
+
+                let container =
+                    document.getElementById("todoList");
+
+                // hiç görev yoksa 1 tane oluştur
+                if (container.children.length === 0) {
+                    addTodo();
+                }
+
+            } else {
+                todoBox.style.display = "none";
+                contentBox.style.display = "block";
+                contentBox.setAttribute("required", "true");
+            }
+        }
+
+        function addTodo() {
+            let container = document.getElementById("todoList");
+
+            let div = document.createElement("div");
+            div.className = "d-flex gap-2 mb-2 todo-item";
+
+            div.innerHTML = `
+            <input type="text" class="form-control todo-input" placeholder="Görev yaz...">
+        `;
+
+            container.appendChild(div);
+        }
+
+
+        document.querySelector("form").addEventListener("submit", function () {
+
+            let inputs = document.querySelectorAll(".todo-input");
+
+            inputs.forEach(input => {
+                if (input.value.trim() !== "") {
+
+                    let hidden = document.createElement("input");
+                    hidden.type = "hidden";
+                    hidden.name = "items[]";
+                    hidden.value = input.value;
+
+                    this.appendChild(hidden);
+                }
+            });
+
+        });
+    </script>
+</body>
+
+</html>

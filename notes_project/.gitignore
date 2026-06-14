@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+venv/
+.env
+
+# MSSQL
+*.mdf
+*.ldf
+*.bak
+
+# IDE
+.vscode/
+.idea/

@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Giriş Yap – NoteApp</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+
+    <style>
+        :root {
+
+            --bg: linear-gradient(135deg, #eef3e8 0%, #f7f7f2 100%);
+
+            --card: rgba(255, 255, 255, 0.72);
+
+            --text: #24313d;
+            --muted: #7c8694;
+
+            --primary: linear-gradient(135deg, #2ea89b 0%, #9ca87b 100%);
+
+            --shadow:
+                0 10px 30px rgba(71, 97, 78, 0.08),
+                0 2px 10px rgba(0, 0, 0, 0.04);
+
+            --border: rgba(255, 255, 255, 0.6);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+
+            min-height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+
+            font-family: system-ui;
+
+            background: var(--bg);
+
+            color: var(--text);
+
+            overflow: hidden;
+
+            position: relative;
+        }
+
+        /* BACKGROUND BLOBS */
+        body::before,
+        body::after {
+
+            content: "";
+
+            position: fixed;
+
+            width: 320px;
+            height: 320px;
+
+            border-radius: 50%;
+
+            filter: blur(80px);
+
+            z-index: -1;
+
+            opacity: .35;
+        }
+
+        body::before {
+
+            background: #8fd3c7;
+
+            top: -120px;
+            left: -100px;
+        }
+
+        body::after {
+
+            background: #d8d2a7;
+
+            bottom: -120px;
+            right: -100px;
+        }
+
+        /* NAVBAR */
+        .navbar-custom {
+
+            padding: 1.2rem 0;
+
+            background: rgba(255, 255, 255, 0.55);
+
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+
+            box-shadow: var(--shadow);
+        }
+
+        .navbar-brand-custom {
+
+            font-weight: 800;
+
+            display: flex;
+            align-items: center;
+            gap: .7rem;
+
+            text-decoration: none;
+
+            font-size: 1.5rem;
+
+            color: #1e293b;
+        }
+
+        .brand-icon {
+
+            width: 46px;
+            height: 46px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 16px;
+
+            background: var(--primary);
+
+            color: white;
+
+            font-size: 1.2rem;
+
+            box-shadow:
+                0 10px 25px rgba(46, 168, 155, 0.22);
+        }
+
+        /* CENTER */
+        .wrapper {
+
+            flex: 1;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 2rem 1rem;
+        }
+
+        /* CARD */
+        .card-login {
+
+            width: 100%;
+            max-width: 430px;
+
+            background: var(--card);
+
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+
+            border-radius: 34px;
+
+            border: 1px solid var(--border);
+
+            box-shadow: var(--shadow);
+
+            overflow: hidden;
+
+            position: relative;
+        }
+
+        /* GLOW */
+        .card-login::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: -100px;
+            right: -100px;
+
+            width: 220px;
+            height: 220px;
+
+            background: rgba(143, 211, 199, 0.25);
+
+            border-radius: 50%;
+
+            filter: blur(50px);
+        }
+
+        .header {
+
+            text-align: center;
+
+            padding: 2.2rem 2rem 1rem;
+        }
+
+        .logo {
+
+            width: 74px;
+            height: 74px;
+
+            margin: 0 auto 1.2rem;
+
+            border-radius: 24px;
+
+            background: var(--primary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 1.8rem;
+
+            color: white;
+
+            box-shadow:
+                0 10px 25px rgba(46, 168, 155, 0.22);
+        }
+
+        .title {
+
+            font-size: 2rem;
+
+            font-weight: 800;
+
+            margin-bottom: .4rem;
+
+            color: #1e293b;
+        }
+
+        .subtitle {
+
+            color: var(--muted);
+
+            font-size: .95rem;
+        }
+
+        /* REGISTER */
+        .register-box {
+
+            text-align: center;
+
+            margin-top: 1rem;
+
+            color: var(--muted);
+
+            font-size: .95rem;
+        }
+
+        .register-box a {
+
+            text-decoration: none;
+
+            font-weight: 700;
+
+            color: #2ea89b;
+        }
+
+        /* FORM */
+        .form-area {
+            padding: 2rem;
+        }
+
+        .form-label {
+
+            font-weight: 700;
+
+            margin-bottom: 10px;
+
+            color: #334155;
+        }
+
+        .input-wrap {
+            position: relative;
+        }
+
+        .input-icon {
+
+            position: absolute;
+
+            left: 16px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #94a3b8;
+
+            font-size: 1rem;
+        }
+
+        .input-custom {
+
+            width: 100%;
+
+            padding: 15px 18px 15px 48px;
+
+            border: 1px solid rgba(255, 255, 255, 0.7);
+
+            background: rgba(255, 255, 255, 0.6);
+
+            backdrop-filter: blur(10px);
+
+            border-radius: 18px;
+
+            font-size: 15px;
+
+            color: var(--text);
+
+            outline: none;
+
+            box-shadow:
+                inset 0 1px 2px rgba(255, 255, 255, 0.3),
+                0 4px 10px rgba(0, 0, 0, 0.03);
+
+            transition: .2s ease;
+        }
+
+        .input-custom:focus {
+
+            border-color: rgba(46, 168, 155, 0.4);
+
+            box-shadow:
+                0 0 0 4px rgba(46, 168, 155, 0.12);
+
+            background: rgba(255, 255, 255, 0.85);
+        }
+
+        .pw-toggle {
+
+            position: absolute;
+
+            right: 15px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+
+            background: none;
+
+            color: #94a3b8;
+        }
+
+        /* BUTTON */
+        .btn-login {
+
+            width: 100%;
+
+            border: none;
+
+            border-radius: 18px;
+
+            padding: 15px;
+
+            font-weight: 700;
+
+            background: var(--primary);
+
+            color: white;
+
+            margin-top: 1rem;
+
+            box-shadow:
+                0 10px 25px rgba(46, 168, 155, 0.25);
+
+            transition: .25s ease;
+        }
+
+        .btn-login:hover {
+
+            transform: translateY(-3px);
+
+            color: white;
+        }
+
+        /* ALERT */
+        .alert {
+
+            border-radius: 16px;
+
+            border: none;
+        }
+
+        /* FOOTER */
+        footer {
+
+            text-align: center;
+
+            padding: 1rem;
+
+            color: #7c8694;
+
+            font-size: .85rem;
+        }
+
+        @media(max-width:768px) {
+
+            .card-login {
+                border-radius: 28px;
+            }
+
+            .title {
+                font-size: 1.7rem;
+            }
+
+            .form-area {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav class="navbar-custom">
+
+        <div class="container">
+
+            <a class="navbar-brand-custom">
+
+                <div class="brand-icon">
+                    <i class="bi bi-journal-text"></i>
+                </div>
+
+                NoteApp
+
+            </a>
+
+        </div>
+
+    </nav>
+
+    <!-- BODY -->
+    <div class="wrapper">
+
+        <div class="card-login">
+
+            <div class="header">
+
+                <div class="logo">
+                    <i class="bi bi-box-arrow-in-right"></i>
+                </div>
+
+                <h1 class="title">
+                    Hoş Geldin
+                </h1>
+
+                <p class="subtitle">
+                    Hesabına giriş yap ve notlarına devam et ✨
+                </p>
+
+                <div class="register-box">
+
+                    Hesabın yok mu?
+
+                    <a href="{% url 'register' %}">
+                        Kayıt ol
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="form-area">
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    <!-- USER -->
+                    <label class="form-label">
+                        Kullanıcı Adı
+                    </label>
+
+                    <div class="input-wrap mb-3">
+
+                        <i class="bi bi-person input-icon"></i>
+
+                        <input name="username" id="username" class="input-custom" placeholder="kullanici_adi" required>
+
+                    </div>
+
+                    <!-- PASS -->
+                    <label class="form-label">
+                        Şifre
+                    </label>
+
+                    <div class="input-wrap">
+
+                        <i class="bi bi-lock input-icon"></i>
+
+                        <input name="password" id="password" type="password" class="input-custom" placeholder="••••••••"
+                            required>
+
+                        <button type="button" class="pw-toggle" onclick="togglePw()">
+
+                            <i id="eye" class="bi bi-eye"></i>
+
+                        </button>
+
+                    </div>
+
+                    {% if error %}
+                    <div class="alert alert-danger mt-3">
+                        {{ error }}
+                    </div>
+                    {% endif %}
+
+                    <button type="submit" class="btn-login">
+
+                        <i class="bi bi-box-arrow-in-right me-2"></i>
+                        Giriş Yap
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        © 2026 NoteApp
+    </footer>
+
+    <script>
+        function togglePw() {
+
+            const pw = document.getElementById("password");
+            const eye = document.getElementById("eye");
+
+            pw.type = pw.type === "password" ? "text" : "password";
+
+            eye.className =
+                pw.type === "password"
+                    ? "bi bi-eye"
+                    : "bi bi-eye-slash";
+        }
+    </script>
+
+</body>
+
+</html>
